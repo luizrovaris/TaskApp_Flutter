@@ -25,10 +25,27 @@ class HomeState extends State<Home>{
     )
     : Scaffold(
       appBar: AppBar(
-        title: Text('Task App'),
+        //title: Text('Task App'),
+        bottom: PreferredSize(
+          child: Column(
+            children: [
+              Row(
+                children: [Text('Task App')],
+              ),
+              Row(
+                children: [Text('Data')],
+              ),
+          ],
+          ),
+          preferredSize: Size.fromHeight(100),
+          ),
         actions: [
           IconButton(onPressed: null, icon: Icon(Icons.add))
         ],
+        flexibleSpace: Image(
+          image: AssetImage('assets/images/task.jpg'),
+          fit: BoxFit.cover,
+          ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: null,
