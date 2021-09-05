@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:task_app/widgets/list_task.dart';
+import '../models/task.dart';
 
 class Home extends StatefulWidget{
   @override
@@ -12,6 +14,11 @@ class Home extends StatefulWidget{
 }
 
 class HomeState extends State<Home>{
+  final List<Task> _listTask = [
+    Task('Curso Flutter', 'Curso de Flutter com Dart.', false),
+    Task('Curso C#', 'Curso de C# .Net Core.', false),
+  ];
+
   @override
   Widget build(BuildContext context) {
     initializeDateFormatting('pt_PT', null);
@@ -28,7 +35,7 @@ class HomeState extends State<Home>{
           onPressed: null,
           ),
         ),
-      child: Text('Home Page'),
+      child: ListTask(_listTask),
     )
     : Scaffold(
       appBar: AppBar(
@@ -77,7 +84,7 @@ class HomeState extends State<Home>{
         onPressed: null,
         child: Icon(Icons.add),
         ),
-      body: Text('Home Page'),
+      body: ListTask(_listTask),
     );
   }
 
