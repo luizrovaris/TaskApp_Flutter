@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:task_app/widgets/home.dart';
 
@@ -10,6 +11,24 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Task App',
+      theme: ThemeData(
+        primaryColor: Color.fromRGBO(224, 239, 244, 1),
+        accentColor: Color.fromRGBO(173, 216, 230, 1),
+        textTheme: TextTheme(
+          bodyText1: TextStyle(fontFamily: 'Shadows Into Light')
+        ),
+        cupertinoOverrideTheme: CupertinoThemeData(
+          barBackgroundColor: Color.fromRGBO(224, 239, 244, 1),
+          textTheme: CupertinoTextThemeData(
+            navTitleTextStyle: TextStyle(
+              fontFamily: 'Lobster',
+              color: Colors.white,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      ),
       home: Home(),
     );
   }
