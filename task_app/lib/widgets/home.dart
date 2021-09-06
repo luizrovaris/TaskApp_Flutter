@@ -16,8 +16,14 @@ class Home extends StatefulWidget{
 class HomeState extends State<Home>{
   final List<Task> _listTask = [
     Task('Curso Flutter', 'Curso de Flutter com Dart.', false),
-    Task('Curso C#', 'Curso de C# .Net Core.', false),
+    Task('Curso C#', 'Curso de C# .Net Core para criação de aplicações Web e BackEnd com deploy em ambiente Azure.', false),
   ];
+
+  void _handleSwitchChange(int index, bool value){
+    setState(() {
+      _listTask[index].finished = value;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +41,7 @@ class HomeState extends State<Home>{
           onPressed: null,
           ),
         ),
-      child: ListTask(_listTask),
+      child: ListTask(_listTask, _handleSwitchChange, _isPortrait),
     )
     : Scaffold(
       appBar: AppBar(
@@ -84,7 +90,7 @@ class HomeState extends State<Home>{
         onPressed: null,
         child: Icon(Icons.add),
         ),
-      body: ListTask(_listTask),
+      body: ListTask(_listTask, _handleSwitchChange, _isPortrait),
     );
   }
 
