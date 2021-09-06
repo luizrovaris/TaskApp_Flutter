@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../models/task.dart';
 
@@ -11,6 +14,23 @@ class ListTask extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final int _maxLength = _isPortrait ? 65 : 150;
+
+    _handleLongPress(String title, String description){
+      showDialog(context: context, builder: (_){
+        return Platform.isIOS 
+        ? CupertinoAlertDialog(
+          title: Text(title),
+          content: Text(description),
+        )
+        : SimpleDialog(
+          title: Text(title),
+          children: [Padding(
+            padding: const EdgeInsets.all(10),
+            child: Text(description),
+          )],
+        );
+      });
+    }
 
     return Material(
       child: ListView.separated(
@@ -30,6 +50,7 @@ class ListTask extends StatelessWidget {
             leading: Switch(
                 value: _listTask[index].finished,
                 onChanged: (value) => this._handleSwitchChange(index, value)),
+            onLongPress: () => _handleLongPress(_listTask[index].title, _listTask[index].description),
           );
         },
         separatorBuilder: (_, __) => Divider(),
