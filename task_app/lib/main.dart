@@ -14,9 +14,6 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Color.fromRGBO(224, 239, 244, 1),
         accentColor: Color.fromRGBO(173, 216, 230, 1),
-        textTheme: TextTheme(
-          bodyText1: TextStyle(fontFamily: 'Shadows Into Light')
-        ),
         cupertinoOverrideTheme: CupertinoThemeData(
           barBackgroundColor: Color.fromRGBO(224, 239, 244, 1),
           textTheme: CupertinoTextThemeData(
@@ -27,6 +24,17 @@ class MyApp extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
+          primaryColor: Colors.white,
+        ),
+        textTheme: TextTheme(
+          bodyText1: TextStyle(fontFamily: 'Shadows Into Light')
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.resolveWith((states) => Color.fromRGBO(224, 239, 244, 1)),
+        )),
+        buttonTheme: ButtonThemeData(
+          buttonColor: Color.fromRGBO(224, 239, 244, 1)
         ),
       ),
       home: Home(),
