@@ -27,6 +27,12 @@ class HomeState extends State<Home>{
     });
   }
 
+  void _saveTask(Task task){
+    setState(() {
+      _listTask.add(task);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     initializeDateFormatting('pt_PT', null);
@@ -38,7 +44,7 @@ class HomeState extends State<Home>{
       showDialog(
         context: context,
         builder: (_){
-          return NewTaskDialog();
+          return NewTaskDialog(_saveTask);
         });
     }
 

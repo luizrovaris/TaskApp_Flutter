@@ -2,8 +2,13 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../models/task.dart';
 
 class NewTaskDialog extends StatelessWidget {
+  final Function _saveTask;
+
+  NewTaskDialog(this._saveTask);
+
   static final _titleController = TextEditingController();
   final Widget _title = Platform.isIOS
       ? CupertinoTextField(
@@ -20,14 +25,26 @@ class NewTaskDialog extends StatelessWidget {
       ? CupertinoTextField(
           placeholder: 'Description',
           controller: _descriptionController,
+          minLines: 5,
+          maxLines: 10,
         )
       : TextField(
           decoration: InputDecoration(labelText: 'Description'),
           controller: _descriptionController,
+          minLines: 5,
+          maxLines: 10,
         );
 
   @override
   Widget build(BuildContext context) {
+    _handleSave() {
+      _saveTask(
+          Task(_titleController.text, _descriptionController.text, false));
+      _titleController.clear();
+      _descriptionController.clear();
+      Navigator.of(context).pop();
+    }
+
     return Platform.isIOS
         ? CupertinoAlertDialog(
             title: Text('Add Task'),
@@ -40,13 +57,14 @@ class NewTaskDialog extends StatelessWidget {
             actions: [
               CupertinoDialogAction(
                 child: Text('Save'),
-                onPressed: null,
+                onPressed: _handleSave,
               ),
             ],
           )
         : AlertDialog(
             title: Text('Add Task'),
             content: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 _title,
                 _description,
@@ -54,7 +72,7 @@ class NewTaskDialog extends StatelessWidget {
             ),
             actions: [
               ElevatedButton(
-                onPressed: null,
+                onPressed: _handleSave,
                 child: Text('Save'),
               )
             ],
