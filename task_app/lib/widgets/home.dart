@@ -33,6 +33,12 @@ class HomeState extends State<Home>{
     });
   }
 
+  void _removeTask(int index){
+    setState(() {
+      _listTask.removeAt(index);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     initializeDateFormatting('pt_PT', null);
@@ -57,7 +63,7 @@ class HomeState extends State<Home>{
           onPressed: _handleAddPress,
           ),
         ),
-      child: ListTask(_listTask, _handleSwitchChange, _isPortrait),
+      child: ListTask(_listTask, _handleSwitchChange, _isPortrait, _removeTask),
     )
     : Scaffold(
       appBar: AppBar(
@@ -106,7 +112,7 @@ class HomeState extends State<Home>{
         onPressed: _handleAddPress,
         child: Icon(Icons.add),
         ),
-      body: ListTask(_listTask, _handleSwitchChange, _isPortrait),
+      body: ListTask(_listTask, _handleSwitchChange, _isPortrait, _removeTask),
     );
   }
 

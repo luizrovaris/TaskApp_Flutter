@@ -8,28 +8,34 @@ class ListTask extends StatelessWidget {
   final List<Task> _listTask;
   final Function _handleSwitchChange;
   final bool _isPortrait;
+  final Function _removeTask;
 
-  ListTask(this._listTask, this._handleSwitchChange, this._isPortrait);
+  ListTask(this._listTask, this._handleSwitchChange, this._isPortrait,
+      this._removeTask);
 
   @override
   Widget build(BuildContext context) {
     final int _maxLength = _isPortrait ? 65 : 150;
 
-    _handleLongPress(String title, String description){
-      showDialog(context: context, builder: (_){
-        return Platform.isIOS 
-        ? CupertinoAlertDialog(
-          title: Text(title),
-          content: Text(description),
-        )
-        : SimpleDialog(
-          title: Text(title),
-          children: [Padding(
-            padding: const EdgeInsets.all(10),
-            child: Text(description),
-          )],
-        );
-      });
+    _handleLongPress(String title, String description) {
+      showDialog(
+          context: context,
+          builder: (_) {
+            return Platform.isIOS
+                ? CupertinoAlertDialog(
+                    title: Text(title),
+                    content: Text(description),
+                  )
+                : SimpleDialog(
+                    title: Text(title),
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Text(description),
+                      )
+                    ],
+                  );
+          });
     }
 
     return Material(
@@ -50,7 +56,12 @@ class ListTask extends StatelessWidget {
             leading: Switch(
                 value: _listTask[index].finished,
                 onChanged: (value) => this._handleSwitchChange(index, value)),
-            onLongPress: () => _handleLongPress(_listTask[index].title, _listTask[index].description),
+            onLongPress: () => _handleLongPress(
+                _listTask[index].title, _listTask[index].description),
+            trailing: IconButton(
+              onPressed: () => _removeTask(index),
+              icon: Icon(Icons.delete),
+            ),
           );
         },
         separatorBuilder: (_, __) => Divider(),
