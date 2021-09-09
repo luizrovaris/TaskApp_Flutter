@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../adaptative/adaptative_button.dart';
 import '../models/task.dart';
 
 class NewTaskDialog extends StatelessWidget {
@@ -71,10 +72,15 @@ class NewTaskDialog extends StatelessWidget {
               ],
             ),
             actions: [
-              ElevatedButton(
-                onPressed: _handleSave,
-                child: Text('Save'),
-              )
+              //Option: ElevatedButton
+              // ElevatedButton(
+              //   onPressed: _handleSave,
+              //   child: Text('Save'),
+              // ),
+              AdaptativeButton(
+                text: 'Save',
+                callback: _handleSave,
+              ),
             ],
           );
   }

@@ -3,7 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:task_app/widgets/list_task.dart';
+import '../adaptative/adaptative_button.dart';
+import '../widgets/list_task.dart';
 import '../models/task.dart';
 import './new_task_dialog.dart';
 
@@ -63,14 +64,20 @@ class HomeState extends State<Home> {
         ? CupertinoPageScaffold(
             navigationBar: CupertinoNavigationBar(
               middle: Text('Task App'),
+              //One option: FlatButton or TextButton:
               // trailing: FlatButton or TextButton(
               //   child: Text('Add'),
               //   onPressed: _handleAddPress,
               //   ),
-              trailing: CupertinoButton(
-                child: Text('Add'),
-                onPressed: _handleAddPress,
-                padding: EdgeInsets.all(0),
+              //One option: CupertinoButton:
+              // trailing: CupertinoButton(
+              //   child: Text('Add'),
+              //   onPressed: _handleAddPress,
+              //   padding: EdgeInsets.all(0),
+              // ),
+              trailing: AdaptativeButton(
+                text: 'Add',
+                callback: _handleAddPress,
               ),
             ),
             child: ListTask(
